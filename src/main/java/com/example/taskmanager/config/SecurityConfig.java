@@ -44,7 +44,6 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // ← ВЕРНУЛИ ЭТОТ БИН, ЧТОБЫ AuthServiceImpl РАБОТАЛ
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();

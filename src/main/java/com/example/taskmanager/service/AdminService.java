@@ -11,5 +11,5 @@ public interface AdminService {
 
     UserResponseDto updateUserRoleAndStatus(Long userId, UserAdminUpdateDto dto);
 
-    void deleteUser(Long userId);  // soft delete или hard
+    void deleteUser(Long userId);
 }

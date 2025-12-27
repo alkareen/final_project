@@ -29,7 +29,6 @@ public class User {
     @Column(nullable = false)
     private boolean enabled = true;
 
-    // Храним роли как строку: "ADMIN,USER" или "USER,MANAGER" и т.д.
     @Column(nullable = false)
     private String roles = "USER";
 }

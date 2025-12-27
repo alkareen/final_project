@@ -14,10 +14,8 @@
             </column>
         </createTable>
 
-        <!-- Составной первичный ключ -->
         <addPrimaryKey tableName="task_category" columnNames="task_id,category_id" constraintName="pk_task_category"/>
 
-        <!-- Внешние ключи -->
         <addForeignKeyConstraint constraintName="fk_task_category_task"
                                  baseTableName="task_category"
                                  baseColumnNames="task_id"

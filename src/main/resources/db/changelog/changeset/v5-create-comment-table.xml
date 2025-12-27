@@ -5,7 +5,7 @@
                                        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <changeSet id="2025-12-26-create-comment-table" author="student">
-        <validCheckSum>ANY</validCheckSum>  <!-- позволяет любые изменения -->
+        <validCheckSum>ANY</validCheckSum>
         <createTable tableName="comment">
             <column name="id" type="BIGSERIAL">
                 <constraints primaryKey="true" primaryKeyName="pk_comment" nullable="false"/>
@@ -24,7 +24,6 @@
             </column>
         </createTable>
 
-        <!-- Внешний ключ на задачу -->
         <addForeignKeyConstraint constraintName="fk_comment_task"
                                  baseTableName="comment"
                                  baseColumnNames="task_id"
@@ -32,7 +31,6 @@
                                  referencedColumnNames="id"
                                  onDelete="CASCADE"/>
 
-        <!-- Внешний ключ на автора -->
         <addForeignKeyConstraint constraintName="fk_comment_author"
                                  baseTableName="comment"
                                  baseColumnNames="author_id"

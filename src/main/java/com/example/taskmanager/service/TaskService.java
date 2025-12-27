@@ -9,11 +9,11 @@ public interface TaskService {
 
     TaskResponseDto create(TaskCreateRequestDto dto, String userEmail);
 
-    List<TaskResponseDto> getMyTasks(String userEmail); // свои + назначенные
+    List<TaskResponseDto> getMyTasks(String userEmail);
 
     List<TaskResponseDto> getTasksInProject(Long projectId, String userEmail);
 
-    List<TaskResponseDto> getAllTasks(); // только MANAGER и ADMIN
+    List<TaskResponseDto> getAllTasks();
 
     TaskResponseDto getById(Long id, String userEmail);
 

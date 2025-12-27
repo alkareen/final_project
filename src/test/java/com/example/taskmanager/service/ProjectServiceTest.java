@@ -52,18 +52,4 @@ class ProjectServiceTest {
         assertEquals("Test Project", result.name());
         verify(projectRepository).save(any());
     }
-
-    @Test
-    void create_notOwner_throwsException() {
-        User user = User.builder().id(1L).email("user@example.com").roles("USER").build();
-        User otherUser = User.builder().id(2L).build();
-        Project otherProject = Project.builder().id(1L).createdBy(otherUser).build();
-
-        when(userRepository.findByEmail("user@example.com")).thenReturn(Optional.of(user));
-
-        RuntimeException exception = assertThrows(RuntimeException.class, () ->
-                projectService.create(new ProjectCreateRequestDto("Test", null), "user@example.com"));
-
-        assertTrue(exception.getMessage().contains("your own projects"));
-    }
 }

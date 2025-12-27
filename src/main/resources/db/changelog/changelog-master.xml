@@ -10,7 +10,5 @@
     <include file="db/changelog/changeset/v4-create-category-table.xml"/>
     <include file="db/changelog/changeset/v5-create-comment-table.xml"/>
     <include file="db/changelog/changeset/v6-create-task-category-link.xml"/>
-<!--    <include file="changesets/v7-add-foreign-keys.xml"/>-->
-<!--    <include file="changesets/v8-insert-initial-data.xml"/>-->
 
 </databaseChangeLog>

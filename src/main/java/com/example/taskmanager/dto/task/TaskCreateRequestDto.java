@@ -24,5 +24,5 @@ public record TaskCreateRequestDto(
 
         Long assigneeId,
 
-        List<Long> categoryIds  // ← НОВОЕ ПОЛЕ
+        List<Long> categoryIds
 ) {}

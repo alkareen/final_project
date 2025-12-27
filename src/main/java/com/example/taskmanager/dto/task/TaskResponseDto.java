@@ -23,5 +23,5 @@ public record TaskResponseDto(
         String createdByEmail,
         LocalDateTime createdAt,
 
-        List<CategoryResponseDto> categories  // ← НОВОЕ ПОЛЕ
+        List<CategoryResponseDto> categories
 ) {}

@@ -26,7 +26,6 @@ public interface TaskMapper {
     @Mapping(source = "createdBy.email", target = "createdByEmail")
     TaskResponseDto toDto(Task entity);
 
-    // Для обновления — игнорируем неизменяемые поля
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntityFromDto(TaskCreateRequestDto dto, @MappingTarget Task entity);
 }

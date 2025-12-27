@@ -11,7 +11,7 @@ public interface ProjectService {
 
     List<ProjectResponseDto> getMyProjects(String userEmail);
 
-    List<ProjectResponseDto> getAllProjects(); // только для MANAGER и ADMIN
+    List<ProjectResponseDto> getAllProjects();
 
     ProjectResponseDto getById(Long id);
 
