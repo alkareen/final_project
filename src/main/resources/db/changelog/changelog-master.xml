@@ -6,10 +6,10 @@
 
     <include file="db/changelog/changeset/v1-create-user-table.xml"/>
     <include file="db/changelog/changeset/v2-create-project-table.xml"/>
-    <include file="changesets/v3-create-task-table.xml"/>
-<!--    <include file="changesets/v4-create-category-table.xml"/>-->
-<!--    <include file="changesets/v5-create-comment-table.xml"/>-->
-<!--    <include file="changesets/v6-create-task-category-link.xml"/>-->
+    <include file="db/changelog/changeset/v3-create-task-table.xml"/>
+    <include file="db/changelog/changeset/v4-create-category-table.xml"/>
+    <include file="db/changelog/changeset/v5-create-comment-table.xml"/>
+    <include file="db/changelog/changeset/v6-create-task-category-link.xml"/>
 <!--    <include file="changesets/v7-add-foreign-keys.xml"/>-->
 <!--    <include file="changesets/v8-insert-initial-data.xml"/>-->
 

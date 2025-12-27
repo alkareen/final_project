@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  # Основная БД для запуска приложения
+  main-db:
+    image: postgres:16-alpine
+    container_name: taskmanager-main-db
+    environment:
+      POSTGRES_DB: final
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - "5432:5432"
+    volumes:
+      - main-postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  # Тестовая БД — только для тестов
+  test-db:
+    image: postgres:16-alpine
+    container_name: taskmanager-test-db
+    environment:
+      POSTGRES_DB: taskmanager_test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - "5433:5432"
+    volumes:
+      - test-postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  main-postgres-data:
+  test-postgres-data:

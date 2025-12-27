@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2025-12-26-create-comment-table" author="student">
+        <validCheckSum>ANY</validCheckSum>  <!-- позволяет любые изменения -->
+        <createTable tableName="comment">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="pk_comment" nullable="false"/>
+            </column>
+            <column name="text" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="task_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Внешний ключ на задачу -->
+        <addForeignKeyConstraint constraintName="fk_comment_task"
+                                 baseTableName="comment"
+                                 baseColumnNames="task_id"
+                                 referencedTableName="task"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+
+        <!-- Внешний ключ на автора -->
+        <addForeignKeyConstraint constraintName="fk_comment_author"
+                                 baseTableName="comment"
+                                 baseColumnNames="author_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+
+</databaseChangeLog>
