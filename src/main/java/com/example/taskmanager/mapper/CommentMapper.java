@@ -15,6 +15,7 @@ public interface CommentMapper {
     @Mapping(target = "createdAt", ignore = true)
     Comment toEntity(CommentCreateRequestDto dto);
 
+    @Mapping(source = "task.id", target = "taskId")
     @Mapping(source = "author.id", target = "authorId")
     @Mapping(source = "author.email", target = "authorEmail")
     CommentResponseDto toDto(Comment entity);

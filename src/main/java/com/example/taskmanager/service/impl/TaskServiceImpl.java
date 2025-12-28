@@ -33,7 +33,6 @@ public class TaskServiceImpl implements TaskService {
         Project project = projectRepository.findById(dto.projectId())
                 .orElseThrow(() -> new RuntimeException("Project not found with id: " + dto.projectId()));
 
-        // Проверка: может ли пользователь создавать задачу в этом проекте
         boolean isManagerOrAdmin = isManagerOrAdmin(currentUser);
         boolean isProjectOwner = project.getCreatedBy().getId().equals(currentUser.getId());
 
@@ -45,7 +44,6 @@ public class TaskServiceImpl implements TaskService {
         task.setProject(project);
         task.setCreatedBy(currentUser);
 
-        // Назначение исполнителя
         if (dto.assigneeId() != null) {
             if (!isManagerOrAdmin && !dto.assigneeId().equals(currentUser.getId())) {
                 throw new RuntimeException("You can only assign the task to yourself");
@@ -54,7 +52,6 @@ public class TaskServiceImpl implements TaskService {
             task.setAssignee(assignee);
         }
 
-        // Установка статуса и приоритета (если не указаны — дефолт из entity)
         if (dto.status() != null) {
             task.setStatus(dto.status());
         }
@@ -62,7 +59,6 @@ public class TaskServiceImpl implements TaskService {
             task.setPriority(dto.priority());
         }
 
-        // Добавление категорий
         if (dto.categoryIds() != null && !dto.categoryIds().isEmpty()) {
             Set<Category> categories = new HashSet<>(
                     categoryRepository.findAllById(dto.categoryIds())
@@ -148,7 +144,6 @@ public class TaskServiceImpl implements TaskService {
             throw new RuntimeException("You don't have permission to update this task");
         }
 
-        // Обновление основных полей
         task.setTitle(dto.title());
         task.setDescription(dto.description());
 
@@ -162,13 +157,11 @@ public class TaskServiceImpl implements TaskService {
             task.setDeadline(dto.deadline());
         }
 
-        // Смена проекта — только MANAGER/ADMIN
         if (dto.projectId() != null && isManagerOrAdmin) {
             Project newProject = getProjectById(dto.projectId());
             task.setProject(newProject);
         }
 
-        // Смена assignee — только MANAGER/ADMIN
         if (dto.assigneeId() != null) {
             if (!isManagerOrAdmin) {
                 throw new RuntimeException("Only MANAGER or ADMIN can change assignee");
@@ -177,7 +170,6 @@ public class TaskServiceImpl implements TaskService {
             task.setAssignee(assignee);
         }
 
-        // Обновление категорий
         if (dto.categoryIds() != null) {
             Set<Category> categories = new HashSet<>(
                     categoryRepository.findAllById(dto.categoryIds())
@@ -208,7 +200,6 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.delete(task);
     }
 
-    // Вспомогательные методы
     private User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));

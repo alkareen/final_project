@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
-@PreAuthorize("hasRole('ADMIN')")  // все методы только для ADMIN
+@PreAuthorize("hasRole('ADMIN')")
 public class AdminServiceImpl implements AdminService {
 
     private final UserRepository userRepository;
@@ -47,7 +47,7 @@ public class AdminServiceImpl implements AdminService {
     public void deleteUser(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        user.setEnabled(false);  // soft delete
+        user.setEnabled(false);
         userRepository.save(user);
     }
 }

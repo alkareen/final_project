@@ -66,7 +66,6 @@ public class ProjectServiceImpl implements ProjectService {
         return projectMapper.toDto(project);
     }
 
-    // update и delete реализуем позже (с проверкой владельца)
     @Override
     public ProjectResponseDto update(Long id, ProjectCreateRequestDto dto, String userEmail) {
         User user = userRepository.findByEmail(userEmail)
@@ -75,7 +74,6 @@ public class ProjectServiceImpl implements ProjectService {
         Project project = projectRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Project not found"));
 
-        // Проверка, что пользователь — владелец проекта (или MANAGER/ADMIN — добавим позже)
         if (!project.getCreatedBy().getId().equals(user.getId())) {
             throw new RuntimeException("You can only update your own projects");
         }

@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # Основная БД для запуска приложения
   main-db:
     image: postgres:16-alpine
     container_name: taskmanager-main-db
@@ -15,7 +14,6 @@ services:
       - main-postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
 
-  # Тестовая БД — только для тестов
   test-db:
     image: postgres:16-alpine
     container_name: taskmanager-test-db

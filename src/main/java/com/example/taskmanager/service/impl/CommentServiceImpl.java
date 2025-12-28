@@ -34,7 +34,6 @@ public class CommentServiceImpl implements CommentService {
         Task task = taskRepository.findById(dto.taskId())
                 .orElseThrow(() -> new RuntimeException("Task not found"));
 
-        // Проверка: может ли пользователь комментировать эту задачу
         boolean isManagerOrAdmin = author.getRoles().contains("MANAGER") || author.getRoles().contains("ADMIN");
         boolean isOwner = task.getCreatedBy().getId().equals(author.getId());
         boolean isAssignee = task.getAssignee() != null && task.getAssignee().getId().equals(author.getId());
@@ -55,7 +54,6 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @Transactional(readOnly = true)
     public List<CommentResponseDto> getByTaskId(Long taskId, String userEmail) {
-        // Можно добавить проверку доступа к задаче, как в TaskService
         return commentRepository.findAllByTaskId(taskId)
                 .stream()
                 .map(commentMapper::toDto)
